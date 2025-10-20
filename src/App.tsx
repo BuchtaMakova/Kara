@@ -74,7 +74,7 @@ function App() {
         setImgSrc("karka.jpg");
       }
 
-      if (newCount >= threshold) {
+      if (noClicks >= threshold) {
         const container = containerRef.current;
         const btn = noBtnRef.current;
 
