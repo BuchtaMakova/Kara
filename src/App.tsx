@@ -61,7 +61,7 @@ function App() {
       return (r + 1) % repeatingQuestions.length;
     });
 
-    setYesScale((prev) => prev + 0.1);
+    setYesScale((prev) => prev + 0.3);
     setNoClicks((prev) => {
       const newCount = prev + 1;
       const threshold = 5;

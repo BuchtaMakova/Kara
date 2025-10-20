@@ -24,18 +24,18 @@
 }
 
 .imageWrapper {
-  width: 20%;
-  aspect-ratio: 1 / 1; /* keep wrapper square */
-  overflow: hidden; /* clip when using cover */
-  flex: none; /* don't let flex parent change wrapper size */
-  position: relative;
-  display: block;
+  /* keep square but cap size so it won't grow arbitrarily on large screens */
+  width: 300px; /* min, preferred (20%), max */
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  flex: none;
+
   border-radius: 10px;
 }
 
 @media screen and (max-width: 700px) {
   .imageWrapper {
-    width: 40%;
+    width: 200px; /* smaller screens: 40% but bounded */
   }
 }
 
@@ -96,15 +96,17 @@
 
 .question {
   position: relative;
-
+  font-size: 25px;
   z-index: 2;
 }
 
 .yes-btn {
   z-index: 0;
+  background-color: rgb(42, 148, 0);
 }
 
 .no-btn {
+  background-color: rgb(148, 0, 0);
 }
 
 .yesWrapper {
@@ -114,4 +116,13 @@
 .noWrapper {
   z-index: 0;
   flex: 2;
+}
+
+@media screen and (max-width: 700px) {
+  .imageWrapper {
+    width: 200px; /* smaller screens: 40% but bounded */
+  }
+  .question {
+    font-size: 20px;
+  }
 }
