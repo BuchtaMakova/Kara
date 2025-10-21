@@ -1,0 +1,171 @@
+.couponContent {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, #38014a, #7d16a1);
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  text-align: center;
+  overflow-y: auto;
+}
+
+.couponTitle {
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  animation: fadeIn 1s ease-out;
+}
+
+.narok {
+  animation: fadeIn 1s ease-out;
+}
+
+.couponGrid {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  width: 100%;
+  margin-bottom: 2rem; /* ✅ some space at bottom for scroll comfort */
+}
+
+.couponCard {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  width: 280px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s, background 0.3s;
+  animation: fadeIn 1s ease-out;
+}
+
+.couponCard:hover {
+  transform: translateY(-10px);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.couponCard h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.couponCard p {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-bottom: 1.5rem;
+}
+
+.redeemButton {
+  background: #ff6bd6;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  padding: 0.7rem 1.2rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.redeemButton:hover {
+  background: #ff85e0;
+  transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 📱 Responsive Layouts */
+@media (max-width: 900px) {
+  .couponGrid {
+    gap: 1rem;
+  }
+
+  .couponCard {
+    width: 240px;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .couponGrid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .couponCard {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .couponTitle {
+    font-size: 1.8rem;
+  }
+}
+
+.passwordContent {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #38014a, #7d16a1);
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+}
+
+.passwordBox {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 1.5rem;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 1s ease-out;
+}
+
+.passwordBox h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.passwordInput {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 1rem;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.passwordButton {
+  background: #ff6bd6;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  padding: 0.7rem 1.5rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.passwordButton:hover {
+  background: #ff85e0;
+  transform: scale(1.05);
+}
