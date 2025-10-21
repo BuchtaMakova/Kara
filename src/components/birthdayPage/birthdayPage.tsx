@@ -1,4 +1,4 @@
-import React, { useEffect, useState, type JSX } from "react";
+import { useEffect, useState, type JSX } from "react";
 import "../birthdayPage/birthdayPage.css";
 
 interface BirthdayPageProps {
