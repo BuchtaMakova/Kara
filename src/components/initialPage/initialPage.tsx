@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import "../../App.css";
 
 interface InitialPageProps {
@@ -28,13 +28,11 @@ const repeatingQuestions = [
 ];
 
 const numberImages = ["1.jpg", "2.jpg", "3.jpg", "4.jpg"];
-const davidImage = "david.jpeg";
-const defaultImage = "karka.jpg";
 
 function InitialPage({ onYes }: InitialPageProps) {
-  const [isLoading, setIsLoading] = useState(true);
   const [yesScale, setYesScale] = useState(1);
-  const [, setNoClicks] = useState(0);
+  const [noClicks, setNoClicks] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
   const [noPosition, setNoPosition] = useState({ top: 0, left: 0 });
   const containerRef = useRef<HTMLDivElement | null>(null);
   const noBtnRef = useRef<HTMLButtonElement | null>(null);
@@ -44,11 +42,17 @@ function InitialPage({ onYes }: InitialPageProps) {
   );
   const [initialIndex, setInitialIndex] = useState(0);
   const [repeatIndex, setRepeatIndex] = useState(0);
-  const [imgSrc, setImgSrc] = useState(defaultImage);
 
-  // 🖼️ Preload images on mount
+  const davidImage = "david.jpeg";
+  const [imgSrc, setImgSrc] = useState("karka.jpg");
+
+  const currentQuestion =
+    initialIndex < initialQuestions.length
+      ? initialQuestions[initialIndex]
+      : repeatingQuestions[repeatIndex];
+
   useEffect(() => {
-    const allImages = [defaultImage, davidImage, ...numberImages];
+    const allImages = [davidImage, "karka.jpg", ...numberImages];
     let loadedCount = 0;
 
     allImages.forEach((src) => {
@@ -57,17 +61,17 @@ function InitialPage({ onYes }: InitialPageProps) {
       img.onload = () => {
         loadedCount++;
         if (loadedCount === allImages.length) {
-          // small artificial delay to show loader
-          setTimeout(() => setIsLoading(false), 1000);
+          setIsLoading(false);
+        }
+      };
+      img.onerror = () => {
+        loadedCount++;
+        if (loadedCount === allImages.length) {
+          setIsLoading(false);
         }
       };
     });
   }, []);
-
-  const currentQuestion =
-    initialIndex < initialQuestions.length
-      ? initialQuestions[initialIndex]
-      : repeatingQuestions[repeatIndex];
 
   const handleNoClick = () => {
     setInitialIndex((i) => {
@@ -76,16 +80,15 @@ function InitialPage({ onYes }: InitialPageProps) {
       }
       return initialQuestions.length;
     });
-
     setRepeatIndex((r) => {
       if (initialIndex < initialQuestions.length - 1) {
         return r;
       }
+      if (repeatingQuestions.length === 0) return 0;
       return (r + 1) % repeatingQuestions.length;
     });
 
     setYesScale((prev) => prev + 0.3);
-
     setNoClicks((prev) => {
       const newCount = prev + 1;
       const threshold = 5;
@@ -95,29 +98,54 @@ function InitialPage({ onYes }: InitialPageProps) {
       } else if (newCount >= 1 && newCount <= numberImages.length) {
         setImgSrc(numberImages[newCount - 1]);
       } else {
-        setImgSrc(defaultImage);
+        setImgSrc("karka.jpg");
       }
 
-      const container = containerRef.current;
-      const btn = noBtnRef.current;
+      if (noClicks >= threshold) {
+        const container = containerRef.current;
+        const btn = noBtnRef.current;
 
-      if (newCount >= threshold && container && btn) {
-        const btnH = btn.offsetHeight || 40;
-        const btnW = btn.offsetWidth || 80;
-        setNoWrapperMinWidth((w) => w ?? btnW);
-        const maxTop = Math.max(0, container.clientHeight - btnH);
-        const maxLeft = Math.max(0, container.clientWidth - btnW);
-        const randomTop = Math.random() * maxTop;
-        const randomLeft = Math.random() * maxLeft;
-        setNoPosition({ top: randomTop, left: randomLeft });
-        setNoDodging(true);
+        if (container && btn && !noDodging) {
+          const btnRect = btn.getBoundingClientRect();
+          const containerRect = container.getBoundingClientRect();
+          const measuredTop = btnRect.top - containerRect.top;
+          const measuredLeft = btnRect.left - containerRect.left;
+          const btnH = btn.offsetHeight || 40;
+          const btnW = btn.offsetWidth || 80;
+          setNoWrapperMinWidth(btnW);
+          setNoDodging(true);
+          setNoPosition({ top: measuredTop, left: measuredLeft });
+          const maxTop = Math.max(0, container.clientHeight - btnH);
+          const maxLeft = Math.max(0, container.clientWidth - btnW);
+          const randomTop = Math.random() * maxTop;
+          const randomLeft = Math.random() * maxLeft;
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              setNoPosition({ top: randomTop, left: randomLeft });
+            });
+          });
+        } else if (container && btn) {
+          const btnH = btn.offsetHeight || 40;
+          const btnW = btn.offsetWidth || 80;
+          setNoWrapperMinWidth((w) => w ?? btnW);
+          const maxTop = Math.max(0, container.clientHeight - btnH);
+          const maxLeft = Math.max(0, container.clientWidth - btnW);
+          const randomTop = Math.random() * maxTop;
+          const randomLeft = Math.random() * maxLeft;
+          setNoPosition({ top: randomTop, left: randomLeft });
+          setNoDodging(true);
+        } else {
+          const randomTop = Math.random() * (window.innerHeight * 0.8);
+          const randomLeft = Math.random() * (window.innerWidth * 0.8);
+          setNoPosition({ top: randomTop, left: randomLeft });
+          setNoDodging(true);
+        }
       }
 
       return newCount;
     });
   };
 
-  // 🌀 Loading screen
   if (isLoading) {
     return (
       <div className="content">
@@ -130,7 +158,6 @@ function InitialPage({ onYes }: InitialPageProps) {
     );
   }
 
-  // 🌟 Main UI after loading
   return (
     <div ref={containerRef} className="content">
       <div className="container">
@@ -143,7 +170,9 @@ function InitialPage({ onYes }: InitialPageProps) {
           <div className="yesWrapper">
             <button
               className="yes-btn"
-              onClick={onYes}
+              onClick={() => {
+                onYes();
+              }}
               style={{
                 transform: `scale(${yesScale})`,
                 transition: "transform 0.2s ease",
