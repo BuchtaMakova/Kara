@@ -143,7 +143,7 @@ function InitialPage({ onYes }: InitialPageProps) {
                 transition: "transform 0.2s ease",
               }}
             >
-              Yes
+              Ano
             </button>
           </div>
           <div
@@ -165,7 +165,7 @@ function InitialPage({ onYes }: InitialPageProps) {
                 transition: "top 0.35s ease, left 0.35s ease",
               }}
             >
-              No
+              Ne
             </button>
           </div>
         </div>
