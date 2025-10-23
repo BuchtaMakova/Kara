@@ -6,6 +6,32 @@
   overflow: hidden;
 }
 
+.loading-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  /* optional - match your app's background */
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid #ddd;
+  border-top: 6px solid #3498db; /* color of the rotating part */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .content {
   width: 100%;
   height: 100vh;
