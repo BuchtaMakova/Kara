@@ -40,7 +40,7 @@ function BirthdayPage({ onShowCoupon }: BirthdayPageProps): JSX.Element {
           {elapsed.days} dní, {pad(elapsed.hours)} hodin a{" "}
           {pad(elapsed.minutes)} minut
         </div>
-        <div>Co svět udělala lepším místem úžasná osoba</div>
+        <div>Co svět udělala lepším místem Klárka Bulavů 💜💜💜</div>
 
         <button className="couponButton" onClick={onShowCoupon}>
           🎁 Pokračovat

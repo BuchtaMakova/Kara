@@ -17,19 +17,19 @@ function CouponPage(): JSX.Element {
 
   const coupons = [
     {
-      title: "💆‍♀️ Free Massage",
+      title: "💆‍♀️ Masáž Zdarma",
       description:
-        "Enjoy one relaxing massage, no time limits, full service guaranteed 💜",
+        "Balíček obsahuje relaxační masáž dle vlastního výběru s plnou péčí, hromadou zlomených kostí a láskou 💜",
     },
     {
-      title: "🍽️ Free Dinner",
+      title: "🍽️ Večeře Zdarma",
       description:
-        "A homemade dinner, candles included, cooked with love and a hint of chaos 🍝",
+        "Balíček obsahuje pozvání na večeři do restaurace, nebo večeři vařernou doma se špetkou lásky a chaosu 🍝",
     },
     {
-      title: "💞 One Free Dumbass Boyfriend",
+      title: "💞 Dumbass Přítel Zdarma",
       description:
-        "Redeem for unlimited hugs, random compliments, and questionable jokes forever 💘",
+        "Balíček obsahuje jednoho dumbass přítele, který tě bude akorát srát. Nekonečno hugs a pusinek jsou taktéž součástí balíčku 💘",
     },
   ];
 
@@ -57,13 +57,14 @@ function CouponPage(): JSX.Element {
 
   return (
     <div className="couponContent">
-      <div className="couponTitle">🎉 Happy Birthday! 🎉</div>
+      <div className="couponTitle">🎉 Všechno nejlepší 🎉</div>
+      <div style={{ marginBottom: "10px" }}>Na co máš nárok:</div>
       <div className="couponGrid">
         {coupons.map((coupon, index) => (
           <div className="couponCard" key={index}>
             <h3>{coupon.title}</h3>
             <p>{coupon.description}</p>
-            <button className="redeemButton">Redeem</button>
+            <button className="redeemButton">Použít</button>
           </div>
         ))}
       </div>
