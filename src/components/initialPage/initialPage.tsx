@@ -34,7 +34,7 @@ const defaultImage = "karka.jpg";
 function InitialPage({ onYes }: InitialPageProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [yesScale, setYesScale] = useState(1);
-  const [noClicks, setNoClicks] = useState(0);
+  const [, setNoClicks] = useState(0);
   const [noPosition, setNoPosition] = useState({ top: 0, left: 0 });
   const containerRef = useRef<HTMLDivElement | null>(null);
   const noBtnRef = useRef<HTMLButtonElement | null>(null);
