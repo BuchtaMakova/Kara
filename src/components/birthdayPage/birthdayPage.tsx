@@ -6,7 +6,7 @@ interface BirthdayPageProps {
 }
 
 function BirthdayPage({ onShowCoupon }: BirthdayPageProps): JSX.Element {
-  const birthDate = new Date(2001, 9, 23, 0, 0, 0);
+  const birthDate = new Date(2001, 9, 23, 10, 23, 0);
 
   const getElapsed = () => {
     const now = new Date();

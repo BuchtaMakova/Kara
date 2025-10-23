@@ -24,7 +24,7 @@ function CouponPage(): JSX.Element {
     {
       title: "🍽️ Večeře Zdarma",
       description:
-        "Balíček obsahuje pozvání na večeři do restaurace, nebo večeři vařernou doma se špetkou lásky a chaosu 🍝",
+        "Balíček obsahuje pozvání na večeři do restaurace, nebo večeři vařenou doma se špetkou lásky a chaosu 🍝",
     },
     {
       title: "💞 Dumbass Přítel Zdarma",
